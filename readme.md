@@ -8,13 +8,12 @@ requirments:
 * bash 5.1+
 
 Whats new in 1.0a?
--------------
+------------------
 * basic functionality 
 * added documentation
 
-stage - init
---------
-Add functions
+Added functions
+---------------
 * join images together into 1 video with defined fps
 * glue videos together into one
 * add music background
