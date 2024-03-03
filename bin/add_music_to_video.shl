@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+function add_music_to_video() {
+    local video_file="$1"
+    local music_file="$2"
+    local output_file="$3"
+
+    #unescape
+    eval "music_file=${music_file}"
+    printf 'add_music_to_video: video_file: %s, music_file: %s, output_file: %s\n' "${video_file}" "${music_file}" "${output_file}"
+    ffmpeg -loglevel fatal -y -i "${video_file}" -i "${music_file}" -c:v copy -c:a aac -strict experimental -map 0:v:0 -map 1:a:0 "${output_file}"
+}

@@ -1,0 +1,17 @@
+#!/bin/env bash
+
+source bin/ff_get_duration.shl
+source bin/audio_copy_part.shl
+
+function audio_adjust_video_length() {
+    #time unit are seconds
+    local input_file="$1"
+    local output_file="$2"
+    local video_file="$3"
+    local videosize
+    
+    printf 'audio_adjust_video_length: input_file: %s, output_file: %s, video_file: %s\n' "${input_file}" "${output_file}" "${video_file}"
+    videosize=$(ff_get_duration "${video_file}")
+    audio_copy_part "${input_file}" "${output_file}" 0 "${videosize}"
+
+}

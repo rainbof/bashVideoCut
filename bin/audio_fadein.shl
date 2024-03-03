@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+function audio_fadein() {
+    local input_file="$1"
+    local output_file="$2"
+    local fadein_time="$3"
+
+    printf 'audio_fadein: input_file: %s, output_file: %s, fadein_time: %s\n' "${input_file}" "${output_file}" "${fadein_time}"
+    ffmpeg -loglevel fatal -y -i "${input_file}" -af "afade=t=in:ss=0:d=${fadein_time}" "${output_file}"
+}

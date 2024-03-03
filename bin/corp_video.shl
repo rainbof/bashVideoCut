@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+function corp_video() {
+    local input_file="$1"
+    local output_file="$2"
+    local width="$3"
+    local height="$4"
+
+    printf 'corp_video: input_file: %s, output_file: %s, width: %s, height: %s\n' "${input_file}" "${output_file}" "${width}" "${height}"
+    ffmpeg -loglevel fatal -y -i "${input_file}" -vf "scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2" "${output_file}"
+    #ffmpeg -y -i "${input_file}" -vf "crop=${width}:${height}" "${output_file}"
+}

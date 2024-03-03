@@ -1,0 +1,16 @@
+#!/bin/env bash
+source bin/ff_get_duration.shl
+
+function audio_fadeout() {
+    local input_file="$1"
+    local output_file="$2"
+    local fadeout_duration="$3"
+    local duration
+    local duration_rounded
+
+    duration="$(ff_get_duration "${input_file}")"
+    duration_rounded="$(printf "%.0f" "${duration}")"
+    
+    printf 'audio_fadeout: input_file: %s, output_file: %s, fadeout_duration: %s, duration: %s, duration_rounded: %s\n' "${input_file}" "${output_file}" "${fadeout_duration}" "${duration}" "${duration_rounded}"
+    ffmpeg -loglevel fatal -y -i "${input_file}" -af "afade=t=out:st=$((duration_rounded - fadeout_duration)):d=${fadeout_duration}" -c:v copy "${output_file}"
+}

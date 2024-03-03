@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+function ff_get_height() {
+    local input_file="$1"
+    local height
+
+    printf 'ff_get_height: input_file: %s\n' "${input_file}"
+    height="$(ffprobe -i "${input_file}" -show_entries stream=width -v quiet -of csv="p=0")"
+    printf "%s" "${height}"
+}

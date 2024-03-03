@@ -1,0 +1,31 @@
+#!/bin/env bash
+
+# function join_videos_nosound() {
+
+# local output_file="$1"
+# shift
+# local videos=("$@")
+
+# ffmpeg -y -i "concat:${videos[*]}" -filter_complex "[0:v:0][1:v:0][2:v:0][3:v:0]concat=n=${#videos[@]}:v=1:a=0[outv]" -map "[outv]" "${output_file}"
+
+# }
+
+function join_videos_nosound() {
+    output_file="$1"
+    shift
+    videos=("$@")
+
+    ffmpeg_args=()
+    for video in "${videos[@]}"; do
+        ffmpeg_args+=("-i" "$video")
+    done
+
+    filter_complex_args=""
+    for i in "${!videos[@]}"; do
+        filter_complex_args+="[$i:v:0] "
+    done
+
+    filter_complex_args+="concat=n=${#videos[@]}:v=1:a=0[outv]"
+    printf 'join_videos_nosound: videos: %s,\noutuput file: %s' "${videos[*]}" "${output_file}"
+    ffmpeg -loglevel fatal -y "${ffmpeg_args[@]}" -filter_complex "$filter_complex_args" -map "[outv]" "$output_file"
+}

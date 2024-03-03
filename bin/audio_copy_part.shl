@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+function audio_copy_part() {
+    #time unit are seconds
+    local input_file="$1"
+    local output_file="$2"
+    local start_time="$3"
+    local stop_time="$4"
+    
+    printf 'audio_copy_part: input_file: %s, output_file: %s, start_time: %s, stop_time: %s\n' "${input_file}" "${output_file}" "${start_time}" "${stop_time}"
+    ffmpeg -loglevel fatal -y -i "${input_file}" -ss "${start_time}" -to "${stop_time}" -c copy "${output_file}"
+}

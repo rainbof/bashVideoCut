@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+function ff_get_width() {
+    local input_file="$1"
+    local width
+
+    printf 'ff_get_width: input_file: %s\n' "${input_file}"
+    width="$(ffprobe -i "${input_file}" -show_entries stream=width -v quiet -of csv="p=0")"
+    printf "%s" "${width}"
+}

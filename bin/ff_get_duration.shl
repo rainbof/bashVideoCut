@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+function ff_get_duration() {
+    local input_file="$1"
+    local duration_rounded
+    local duration
+
+    LC_NUMERIC=C
+    duration="$(ffprobe -i "${input_file}" -show_entries format=duration -v quiet -of csv="p=0")"
+    duration_rounded="$(printf "%.0f" "${duration}")"
+    printf "%s" "${duration_rounded}"
+}
