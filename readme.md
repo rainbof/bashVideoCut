@@ -5,6 +5,9 @@ goal of this project is create set of basic and simple scripts to maniplulate wi
 
 Planed development stages
 ----------------------------
+* alpha   (now)
+* beta    to test
+* final   shift major version
 
 requirments:
 ------------
