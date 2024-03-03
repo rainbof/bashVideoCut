@@ -1,6 +1,7 @@
 #!/bin/bash
+
 source bin/join_images_in_folder.shl
-source bin/join_videos.shl
+source bin/join_videos_nosound.shl
 source bin/add_music_to_video.shl
 source bin/audio_fadein.shl
 source bin/audio_fadeout.shl
@@ -48,8 +49,6 @@ renderVideo+=("${PWD}/video05_flip.mp4")
 rm -rf "${renderedvideo_nosound}"
 renderedvideo_nosound="${PWD}/vystup.mp4"
 join_videos_nosound "${renderedvideo_nosound}" "${renderVideo[@]}"
-
-join_videos "${renderedvideo_nosound}" "${renderVideo[@]}"
 
 audiotrack_raw="${wrk_dir}/Dno/stopa.mp3"
 eval audiotrack_raw="${audiotrack_raw}"
